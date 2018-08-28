@@ -3,23 +3,23 @@
 
 ###Setup and Running on ubuntu 16.04
 
-sudo apt install virtualenv libffi-dev libssl-dev python-dev
-virtualenv -p /usr/bin/python3 venv
-source venv/bin/activate
-git clone https://github.com/xeroc/piston-lib.git
-cd piston-lib/
-git checkout 0.4.1
-pip install -e .
-cd ..
-pip install python-dateutil
-git clone https://github.com/lafona/musefeed.git
-cd musefeed
-git checkout musefeed
+sudo apt install virtualenv libffi-dev libssl-dev python-dev  
+virtualenv -p /usr/bin/python3 venv  
+source venv/bin/activate  
+git clone https://github.com/xeroc/piston-lib.git  
+cd piston-lib/  
+git checkout 0.4.1  
+pip install -e . 
+cd ..  
+pip install python-dateutil  
+git clone https://github.com/lafona/musefeed.git  
+cd musefeed  
+git checkout musefeed  
 
-#####edit musefeed.py to correct witness name
+_edit musefeed.py to correct witness name_
 
 
-python musefeed.py #needs to be running with cli wallet open and unlocked in another window './cli_wallet -r'
+python musefeed.py #needs to be running with cli wallet open and unlocked in another window './cli_wallet -r'  
 
 
 ### Additional Configuration Info
