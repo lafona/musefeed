@@ -1,7 +1,7 @@
 ### Supported Exchanges
 * Openledger (BTS-OPEN.XSD)
 
-###Setup and Running on ubuntu 16.04
+### Setup and Running on ubuntu 16.04
 
 sudo apt install virtualenv libffi-dev libssl-dev python-dev  
 virtualenv -p /usr/bin/python3 venv  
