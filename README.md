@@ -1,35 +1,32 @@
 ### Supported Exchanges
-* Bittrex
-* Openledger (BTS-STEEM, Open.BTC-STEEM)
-* Poloniex (Not listed yet)
+* Openledger (BTS-OPEN.XSD)
+
+###Setup and Running on ubuntu 16.04
+
+sudo apt install virtualenv libffi-dev libssl-dev python-dev
+virtualenv -p /usr/bin/python3 venv
+source venv/bin/activate
+git clone https://github.com/xeroc/piston-lib.git
+cd piston-lib/
+git checkout 0.4.1
+pip install -e .
+cd ..
+pip install python-dateutil
+git clone https://github.com/lafona/musefeed.git
+cd musefeed
+git checkout musefeed
+
+#####edit musefeed.py to correct witness name
 
 
-### Preparation
-To use this price feed script, the following dependencies and packages should be installed.
-
-    sudo apt-get install libffi-dev libssl-dev python3-dev python3-pip
-    sudo pip3 install python-dateutil
-    sudo pip3 install websocket-client
-    sudo pip3 install steem
-
-(if you got an error during installing steem, run ``sudo pip3 install upgrade pip``)
-
-In addition, you should run cli_wallet by using the following command,
-
-    cli_wallet -s ws://localhost:8090 -H 127.0.0.1:8092 --rpc-http-allowip=127.0.0.1
-
-And unlock your cli_wallet.
+python musefeed.py #needs to be running with cli wallet open and unlocked in another window './cli_wallet -r'
 
 
-### Installation
-Copy the code in [this link](https://github.com/clayop/steemfeed/blob/master/steemfeed.py) and paste as `steemfeed.py` in your witness server.
-
-
-### Configuration
+### Additional Configuration Info
 Then, edit the `steemfeed.py` to configure. We have some items under Config category in the code.
 
 * `interval`: Interval of publishing price feed. The default value is one hour (3600 seconds)
-* `freq`: Frequency of parsing trade history. Please be noticed that it can parse only 200 last trading history (Bittrex), so as trading is active you may need to decrease this frequency value.
+* `freq`: Frequency of parsing trade history.
 * `min_change`: Minimum price change percentage to publish feed
 * `max_age`: Maximum age of price feed
 * `manual_conf`: Maximum price change without manual confirmation. If price change exceeds this, you will be asked to confirm
@@ -39,11 +36,4 @@ Then, edit the `steemfeed.py` to configure. We have some items under Config cate
 * `bts_ws` : List of BitShares Websocket servers
 * `rpc_host`: Your RPC host address
 * `rpc_port`: Your RPC host port
-* `witness`: Enter ***YOUR WITNESS ID*** here
- 
-
-### Run
-Then, run this code in a separate screen
-
-    screen -S steemfeed
-    python3 ./steemfeed.py
+* `witness`: Enter ***YOUR WITNESS ID***
