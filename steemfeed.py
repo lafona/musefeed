@@ -87,38 +87,6 @@ def telegram(method, params=None):
     r = requests.get(url+method, params = params).json()
     return r
 
-def btc_usd():
-    prices = {}
-    try:
-        r = requests.get("https://api.bitfinex.com/v1/pubticker/BTCUSD").json()
-        prices['bitfinex'] = {'price': float(r['last_price']), 'volume': float(r['volume'])}
-    except:
-        pass
-    try:
-        r = requests.get("https://api.exchange.coinbase.com/products/BTC-USD/ticker").json()
-        prices['coinbase'] = {'price': float(r['price']), 'volume': float(r['volume'])}
-    except:
-        pass
-    try:
-        r = requests.get("https://www.okcoin.com/api/v1/ticker.do?symbol=btc_usd").json()["ticker"]
-        prices['okcoin'] = {'price': float(r['last']), 'volume': float(r['vol'])}
-    except:
-        pass
-    try:
-        r = requests.get("https://www.bitstamp.net/api/v2/ticker/btcusd/").json()
-        prices['bitstamp'] = {'price': float(r['last']), 'volume': float(r['volume'])}
-    except:
-        pass
-    if not prices:
-       return 0
-    total_usd = 0
-    total_btc = 0
-    for p in prices.values():
-        total_usd += p['price'] * p['volume']
-        total_btc += p['volume']
-    avg_price = total_usd / total_btc
-    return avg_price
-
 def bts_dex_hist(address):
     for s in address:
         try:
@@ -208,7 +176,7 @@ if __name__ == '__main__':
 
         if curr_t - start_t >= interval:
             if steem_q > 0:
-                price = btc_q/steem_q#*btc_usd()
+                price = btc_q/steem_q
                 print("btc_q: ", btc_q, "muse_q: ",steem_q, "bts_btc_p: ",bts_btc_p)
                 print(price)
                 price_str = format(price, ".6f")
